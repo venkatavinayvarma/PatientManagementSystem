@@ -2,6 +2,7 @@ package com.vinay.pm.patientservice.service;
 
 import com.vinay.pm.patientservice.dto.PatientRequestDTO;
 import com.vinay.pm.patientservice.dto.PatientResponseDTO;
+import com.vinay.pm.patientservice.exception.EmailAlreadyExistsException;
 import com.vinay.pm.patientservice.mapper.PatientMapper;
 import com.vinay.pm.patientservice.model.Patient;
 import com.vinay.pm.patientservice.repository.PatientRepository;
@@ -30,6 +31,11 @@ public class PatientService {
 
 
     public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO){
+        if (patientRepository.existsByEmail(patientRequestDTO.getEmail())) {
+            throw  new EmailAlreadyExistsException("A patient with this email " +
+                    "already exists"+ patientRequestDTO.getEmail());
+        }
+
         Patient newpatient = patientRepository.save(
                 PatientMapper.toModel(patientRequestDTO));
 

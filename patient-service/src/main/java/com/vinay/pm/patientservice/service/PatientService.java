@@ -1,5 +1,6 @@
 package com.vinay.pm.patientservice.service;
 
+import com.vinay.pm.patientservice.dto.PatientRequestDTO;
 import com.vinay.pm.patientservice.dto.PatientResponseDTO;
 import com.vinay.pm.patientservice.mapper.PatientMapper;
 import com.vinay.pm.patientservice.model.Patient;
@@ -26,5 +27,14 @@ public class PatientService {
 
         return patientResponseDTOs;
     }
+
+
+    public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO){
+        Patient newpatient = patientRepository.save(
+                PatientMapper.toModel(patientRequestDTO));
+
+        return PatientMapper.toDTO(newpatient);
+    }
+
 
 }

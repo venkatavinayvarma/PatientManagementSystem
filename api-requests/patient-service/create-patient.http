@@ -1,0 +1,13 @@
+### Post request to create a patient
+POST http://localhost:4000/patients
+Content-Type: application/json
+
+{
+  "name": "Ace D potregas",
+  "email": "ace@gmail.com",
+  "address": "124 Blue village road, Onepiece",
+  "dateOfBirth": "2005-11-10",
+  "registeredDate": "2023-04-17"
+}
+
+###
